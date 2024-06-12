@@ -1,0 +1,35 @@
+.Home {
+    background-image: url('../../assets/Jett.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.div {
+    background-color: rgba(10, 11, 13, 0.8);
+}
+/* Animation Styles */
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+.agents{
+    list-style-type:disc;
+}
