@@ -5,7 +5,7 @@ import { User } from '../models/user.model.js'
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
-import { v4 as uuidv4 } from 'uuid'
+
 const generateaccesstokenandrefreshtoken = async (id) => {
     try {
         const user = await User.findById(id)
@@ -59,34 +59,28 @@ const Signup = asynchandler(async (req, res) => {
             subject: "OTP for Verification",
             text: `Your OTP for verification is ${OTP}`
         })
-
-        const option = {
-            httpOnly: true,
-            secure: true
-        }
-        const uniqueid = uuidv4()
         const user = await User.create({
             email,
             password,
-            avatarImage: image.url,
+            avatarImage: image.secure_url,
             OTP,
-            OTPTOKEN: uniqueid,
             avatarImagepath: avatarimagelocalpath
         })
         const createdUser = await User.findById(user._id).select('-password -refreshToken')
         if (!createdUser) {
             throw new Apierrors(500, "Something went wrong while registering user.")
         }
-        return res.status(200).cookie("OTPTOKEN", uniqueid, option).json(new Apiresponse(200, OTP, "OTP sent Successfully."))
+        // console.log(createdUser)
+        return res.status(200).json(new Apiresponse(200, createdUser, "OTP sent Successfully."))
     } catch (error) {
         return res.status(500).json(new Apiresponse(500, {}, "Failed to Send OTP."))
     }
 })
 const verifyOTPEmail = asynchandler(async (req, res) => {
-    const otptoken = req.cookies.OTPTOKEN
+    const userId = req.params.id
     const { OTP } = req.body
-    const user = await User.findOne({ OTPTOKEN: otptoken })
-    // console.log(user, otptoken)
+    const user = await User.findById(
+        userId)
     if (!user) {
         throw new Apierrors(404, "User does not exists")
     }
@@ -95,16 +89,15 @@ const verifyOTPEmail = asynchandler(async (req, res) => {
     }
     // console.log(parseInt(OTP, 10), user.OTP)
     if (parseInt(OTP, 10) !== user.OTP) {
+        // console.log(OTP,user.OTP)
         throw new Apierrors(404, "Invalid OTP.")
     }
     user.OTP = undefined
-    user.OTPTOKEN = undefined
     await user.save({ validateBeforeSave: false })
     const registereduser = await User.findById(user._id).select("-password -refershToken")
     if (!registereduser) {
         throw new Apierrors(500, "Something went wrong while completing registration.");
     }
-    res.clearCookie('OTPTOKEN')
     return res.status(200).json(new Apiresponse(200, registereduser, "User registered successfully"));
 })
 // const SignupPhone = asynchandler(async (req, res) => {

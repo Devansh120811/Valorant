@@ -4,7 +4,7 @@ import { verifyJWT } from '../middleware/auth.middleware.js'
 import { upload } from '../middleware/multer.middleware.js'
 const router = Router()
 router.route("/signup").post(upload.single('avatarImage'), Signup)
-router.route("/signup/verify").post(verifyOTPEmail)
+router.route("/signup/verify/:id").post(verifyOTPEmail)
 // router.route("/signup/phoneno").post(upload.single('avatarImage'), SignupPhone)
 // router.route("/signup/phoneno/verify").post(verifyOTP)
 router.route("/login").post(upload.single('avatarImage'), login)

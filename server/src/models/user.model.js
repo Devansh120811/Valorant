@@ -19,9 +19,6 @@ const userSchema = new mongoose.Schema({
     OTP: {
         type: Number
     },
-    OTPTOKEN: {
-        type: String
-    },
     avatarImage: {
         type: String,
         required: true
