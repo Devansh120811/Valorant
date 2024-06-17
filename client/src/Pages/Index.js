@@ -5,4 +5,5 @@ import Login from './Login/Login.jsx'
 import ForgotPasswordPage from './ForgotPassword.jsx'
 import Signup from './Signup/Signup.jsx'
 import VerifyOTP from './VerifyOTP/VerifyOTP.jsx'
-export { Home, About, ContactUs, Login, ForgotPasswordPage, Signup, VerifyOTP }
+import Registration from './Registration/Registration.jsx'
+export { Home, About, ContactUs, Login, ForgotPasswordPage, Signup, VerifyOTP,Registration }

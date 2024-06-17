@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar.jsx'
 import './Home.css'
 function Home() {
   return (
-    <div className='flex font-Poppins Home h-auto w-screen flex-col gap-12 overflow-auto'>
+    <div className='flex font-Poppins Home h-auto w-screen flex-col md:gap-12 gap-24 overflow-x-hidden'>
       <Navbar />
       <div className='text-white div h-full flex flex-col md:text-sm text-xs md:gap-5 gap-3'>
         <hr className='m-3'>
@@ -116,7 +116,7 @@ function Home() {
         </div>
         <hr>
         </hr>
-        <div className='w-full text-center text-white h-auto bg-inherit flex flex-col items-center justify-center gap-3'>
+        <div className='w-full text-center text-white h-auto  flex flex-col items-center justify-center gap-3'>
           <div className='flex flex-col gap-3'>
             <div>
               Get Started Today!

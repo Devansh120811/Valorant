@@ -35,25 +35,26 @@ const Signup = () => {
             alert("Please Provide the Avatar Image.")
             return;
         }
-        if (!emailError && !passwordError && email && password) {
-            const formdata = new FormData()
-            formdata.append("email", email)
-            formdata.append("password", password)
-            formdata.append("avatarImage", fileName)
-            try {
-                const response = await fetch("http://localhost:5000/signup", {
-                    method: "POST",
-                    body: formdata,
-                });
-                const dataa = await response.json();
-                if (!response.ok) throw new Error("User cannot Signup");
-                else {
-                    navigate("/Signup/verifyOTP")
-                }
-            } catch (error) {
-                console.log("Error: ", error);
+        const formdata = new FormData()
+        formdata.append("email", email)
+        formdata.append("password", password)
+        formdata.append("avatarImage", fileName)
+        try {
+            const response = await fetch("http://localhost:5000/signup", {
+                method: "POST",
+                body: formdata,
+            });
+            const dataa = await response.json();
+            if (!response.ok) throw new Error("User cannot Signup");
+            else {
+                alert(dataa.message)
+                console.log(dataa.data._id)
+                navigate(`/Signup/verifyOTP/${dataa.data._id}`)
             }
+        } catch (error) {
+            console.log("Error: ", error);
         }
+
 
     };
     const handleSubmit = (e) => {
@@ -99,7 +100,7 @@ const Signup = () => {
                                             accept="image/*"
                                             ref={inputRef}
                                             onChange={handleUpload}
-                                            className="hidden cursor-pointer"
+                                            className="hidden cursor-pointer rounded-full"
                                         />
                                     </div>
                                     <div className="label text-sm mt-2 pb-1">

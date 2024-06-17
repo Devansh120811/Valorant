@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.body {
+    overflow: auto;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6f61, #6a0572, #ffc107, #4caf50, #03a9f4);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    min-height: 100vh;
+    width: 500px;
+    box-shadow: 0px 0px 30px rgba(14, 172, 140, 0.961);
+    margin: 30px;
+}
+
+.form {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.form h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #00ffa2;
+}
+
+.leader,
+.member {
+    font-size: 1.8em;
+    margin-top: 25px;
+    color: #fff;
+}
+
+.input-box {
+    margin-top: 25px;
+    text-align: left;
+}
+
+.label {
+    font-size: 1.1em;
+    color: #fff;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    height: 50px;
+    padding: 0 10px;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-container:hover,
+.input-container:focus-within {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.input-container i {
+    font-size: 20px;
+    color: #fff;
+}
+
+.input-field {
+    font-size: 16px;
+    background: none;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 0 10px;
+    outline: none;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    background: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border-color 0.2s ease;
+}
+
+.avatar-wrapper:hover {
+    border-color: #ddd;
+}
+
+.avatar-wrapper input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures the image covers the entire avatar area */
+    display: block;
+    border-radius: 50%;
+    transform: scale(1); /* Ensures the image fits within the circle */
+}
+
+.submit {
+    background: #0df9a293;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-box .submit {
+    display: flex;
+    justify-content: center;
+}
+
+.submit:hover {
+    background: #15e599ea;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

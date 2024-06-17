@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./VerifyOTP.css";
 
 const VerifyOTP = () => {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [hue, setHue] = useState(0);
-
+  const { id } = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
     const interval = setInterval(() => {
       setHue((prevHue) => (prevHue + 1) % 360);
@@ -26,9 +28,10 @@ const VerifyOTP = () => {
   const OTPVERIFY = async () => {
     try {
       const data = {
-        OTP: otp
+        OTP: otp.join("")
       }
-      const response = await fetch("http://localhost:5000/signup/verify", {
+      console.log(typeof (otp.join("")))
+      const response = await fetch(`http://localhost:5000/signup/verify/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -40,7 +43,8 @@ const VerifyOTP = () => {
       }
       else {
         const r1 = await response.json()
-        console.log(r1)
+        alert(r1.message)
+        navigate("/")
       }
     } catch (error) {
       alert("Error:", error)
@@ -68,8 +72,11 @@ const VerifyOTP = () => {
   };
 
   return (
-    <div className="otp-container">
-      <h2 className="otp-title text-center">Verify OTP</h2>
+    <div className="otp-container gap-4">
+      <h2 className="otp-title text-center font-Poppins">OTP Verification</h2>
+      <p className=" text-xl font-semibold">
+        Enter the Six digit OTP for Verification:
+      </p>
       <div className="otp-inputs">
         {otp.map((data, index) => (
           <input
@@ -85,10 +92,7 @@ const VerifyOTP = () => {
       </div>
       <button
         className="verify-button cursor-pointer"
-        onClick={(e) => {
-          e.preventDefault()
-          OTPVERIFY()
-        }}
+        onClick={OTPVERIFY}
       >
         Verify
       </button>

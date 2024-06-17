@@ -7,11 +7,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
-    display: flex;
-    align-items: center;
-    background: #000;
-}
+
 
 section {
     position: absolute;
@@ -156,7 +152,13 @@ section .signin .content .form .inputBox i {
     letter-spacing: 0.05em;
     cursor: pointer;
 }
+input[type="password"]::-ms-reveal, input[type="password"]::-ms-clear {
+    display: none;
+}
 
+input[type="password"]::-webkit-clear-button, input[type="password"]::-webkit-reveal-button {
+    display: none;
+}
 input[type="submit"]:active {
     opacity: 0.6;
 }

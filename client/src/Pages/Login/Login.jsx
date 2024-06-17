@@ -44,54 +44,55 @@ function Login() {
         reader.readAsDataURL(file);
         setFileName(file);
     };
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
     const handleLogin = async (e) => {
-        e.preventDefault();
         validateEmail();
         validatePassword();
         if (!fileName) {
             alert("Please Provide the Avatar Image.")
             return;
         }
-        if (!emailError && !passwordError && email && password) {
-
+        try {
             const formdata = new FormData()
             formdata.append("email", email)
             formdata.append("password", password)
             formdata.append("avatarImage", fileName)
-            try {
-                const response = await fetch("http://localhost:5000/login", {
-                    method: "POST",
-                    body: formdata,
-                });
-                const dataa = await response.json();
-                const { accessToken, refreshToken } = dataa.data;
-                if (!response.ok) throw new Error("User cannot login.");
-                else {
-                    alert("User Login Successfully.");
-                    window.localStorage.setItem("authStatus", true)
-                    window.localStorage.setItem("accesstoken", accessToken);
-                    window.localStorage.setItem("refreshtoken", refreshToken);
-                    dispatch(login({ accessToken, refreshToken }));
-                    navigate("/Home");
-                }
-            } catch (error) {
-                console.log("Error: ", Error);
+            const response = await fetch("http://localhost:5000/login", {
+                method: "POST",
+                body: formdata,
+            });
+            const dataa = await response.json();
+            const { accessToken, refreshToken } = dataa.data;
+            if (!response.ok) alert(dataa.message);
+            else {
+                alert("User Login Successfully.");
+                window.localStorage.setItem("authStatus", true)
+                window.localStorage.setItem("accesstoken", accessToken);
+                window.localStorage.setItem("refreshtoken", refreshToken);
+                dispatch(login({ accessToken, refreshToken }));
+                navigate("/Home");
             }
-            if (rememberMe) {
-                // Save email and password for at least one month
-                localStorage.setItem("rememberedEmail", email);
-                localStorage.setItem("rememberedPassword", password);
-                // Set expiry date for one month from now
-                const expiryDate = new Date();
-                expiryDate.setMonth(expiryDate.getMonth() + 1);
-                localStorage.setItem("expiryDate", expiryDate.toISOString());
-            } else {
-                // Clear remembered email and password if "Remember me" is unchecked
-                localStorage.removeItem("rememberedEmail");
-                localStorage.removeItem("rememberedPassword");
-                localStorage.removeItem("expiryDate");
-            }
+        } catch (error) {
+            console.log("Error")
         }
+
+        if (rememberMe) {
+            // Save email and password for at least one month
+            localStorage.setItem("rememberedEmail", email);
+            localStorage.setItem("rememberedPassword", password);
+            // Set expiry date for one month from now
+            const expiryDate = new Date();
+            expiryDate.setMonth(expiryDate.getMonth() + 1);
+            localStorage.setItem("expiryDate", expiryDate.toISOString());
+        } else {
+            // Clear remembered email and password if "Remember me" is unchecked
+            localStorage.removeItem("rememberedEmail");
+            localStorage.removeItem("rememberedPassword");
+            localStorage.removeItem("expiryDate");
+        }
+
     };
 
     // Load remembered email and password if available
@@ -116,7 +117,7 @@ function Login() {
     }, []);
 
     return (
-        <form id="login-form" onSubmit={handleLogin}>
+        <form id="login-form" onSubmit={handleSubmit}>
             <section>
                 {Array.from({ length: 160 }, (_, index) => (
                     <span key={index}></span>
@@ -188,7 +189,7 @@ function Login() {
                                             </label>
                                         </div>
                                         <div className="login-box mb-2 flex flex-col">
-                                            <button className="login-btn bg-green-500 text-black w-full font-semibold text-lg py-2 h-12 rounded-md" type="submit">
+                                            <button className="login-btn bg-green-500 text-black w-full font-semibold text-lg py-2 h-12 rounded-md" onClick={handleLogin}>
                                                 Log In
                                             </button>
                                         </div>

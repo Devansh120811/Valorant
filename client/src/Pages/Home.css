@@ -1,13 +1,50 @@
 .Home {
-    background-image: url('../../assets/Jett.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    /* Remove background image */
+    background-image: none;
+    /* Gradient background with contrasting colors */
+    background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+    /* Ensure background covers the entire container */
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    /* Animation */
+    animation: gradientAnimation 10s linear infinite;
 }
 
-.div {
-    background-color: rgba(10, 11, 13, 0.8);
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
+
+
+.div {
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Semi-transparent black */
+    padding: 20px;
+    /* Adjust padding as needed */
+    border-radius: 10px;
+    /* Optional: Rounded corners */
+}
+
+.div p {
+    color: white;
+    /* Text color */
+    font-size: 1rem;
+    /* Adjust font size as needed */
+    line-height: 1.5;
+    /* Adjust line height for readability */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    /* Text shadow for contrast */
+}
+
 /* Animation Styles */
 .fade-in-left {
     opacity: 0;
@@ -30,6 +67,7 @@
     opacity: 1;
     transform: translateX(0);
 }
-.agents{
-    list-style-type:disc;
+
+.agents {
+    list-style-type: disc;
 }
