@@ -6,7 +6,7 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js'
 
 const createteam = asynchandler(async (req, res) => {
     const user = req.user
-    const { teamname, teamleadername, teamleaderPhoneno, teamleaderRiotId, teammember1name, teammember1riotId, teammember2name, teammember2riotId, teammember3name, teammember3riotId, teammember4name, teammember4riotId } = req.body
+    const { teamname, teamleadername, teamleaderPhoneno,teamleaderEmail, teamleaderRiotId, teammember1name, teammember1riotId, teammember2name, teammember2riotId, teammember3name, teammember3riotId, teammember4name, teammember4riotId } = req.body
     const teaam = await teams.findOne({ teamname: teamname })
     // console.log(teaam)
     if (teaam) {
@@ -57,6 +57,7 @@ const createteam = asynchandler(async (req, res) => {
         teamname,
         teamleadername,
         teamleaderPhoneno,
+        teamleaderEmail,
         teamleaderRiotId,
         teamImage: image.url,
         teamMembers: teammembers,

@@ -14,6 +14,11 @@ const teamSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
+    teamleaderEmail:{
+       type:String,
+       unique:true,
+       required:true
+    },
     teamleaderRiotId: {
         type: String,
         required: true
