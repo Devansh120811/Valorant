@@ -26,9 +26,10 @@ const Registration = () => {
     const handleFileChange = (e) => {
         setAvatar(URL.createObjectURL(e.target.files[0]));
     };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = (e) => {
+     e.preventDefault()
+    }
+    const handleRegister = async () => {
 
         // Form validation
         for (const key in formData) {
@@ -93,9 +94,8 @@ const Registration = () => {
                     <div className="top">
                         <h1>Registration</h1>
                     </div>
-                    <div className="input-box">
+                    <div className="input-box flex flex-col justify-center items-center gap-3">
                         <div className="avatar-wrapper">
-                            <label htmlFor="avatar" className="label">Avatar</label>
                             <input
                                 type="file"
                                 id="avatar"
@@ -104,6 +104,7 @@ const Registration = () => {
                             />
                             {avatar && <img id="output" src={avatar} alt="Avatar" />}
                         </div>
+                        <label htmlFor="avatar" className="label">Team Logo</label>
                     </div>
 
                     <div className="input-box">
@@ -283,7 +284,9 @@ const Registration = () => {
                         </div>
                     </div>
                     <div className="input-box">
-                        <input type="submit" className="submit" value="Register" />
+                       <button className='submit' onClick={handleRegister}>
+                        Register
+                       </button>
                     </div>
                 </form>
             </div>
