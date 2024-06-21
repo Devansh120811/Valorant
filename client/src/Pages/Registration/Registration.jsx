@@ -4,18 +4,19 @@ import './Registration.css';
 const Registration = () => {
     const [avatar, setAvatar] = useState(null);
     const [formData, setFormData] = useState({
-        leaderName: '',
-        leaderEmail: '',
-        leaderPhone: '',
-        leaderRiotId: '',
-        member1Name: '',
-        member1RiotId: '',
-        member2Name: '',
-        member2RiotId: '',
-        member3Name: '',
-        member3RiotId: '',
-        member4Name: '',
-        member4RiotId: ''
+        teamname: '',
+        teamleadername: '',
+        teamleaderEmail: '',
+        teamleaderPhoneno: '',
+        teamleaderRiotId: '',
+        teammember1name: '',
+        teammember1riotId: '',
+        teammember2name: '',
+        teammember2riotId: '',
+        teammember3name: '',
+        teammember3riotId: '',
+        teammember4name: '',
+        teammember4riotId: ''
     });
 
     const handleInputChange = (e) => {
@@ -27,7 +28,7 @@ const Registration = () => {
         setAvatar(URL.createObjectURL(e.target.files[0]));
     };
     const handleSubmit = (e) => {
-     e.preventDefault()
+        e.preventDefault()
     }
     const handleRegister = async () => {
 
@@ -46,7 +47,7 @@ const Registration = () => {
 
         // Prepare data for submission
         const data = new FormData();
-        data.append('avatar', document.getElementById('avatar').files[0]);
+        data.append('teamImage', document.getElementById('avatar').files[0]);
         for (const key in formData) {
             data.append(key, formData[key]);
         }
@@ -68,18 +69,19 @@ const Registration = () => {
             // Reset form
             setAvatar(null);
             setFormData({
-                leaderName: '',
-                leaderEmail: '',
-                leaderPhone: '',
-                leaderRiotId: '',
-                member1Name: '',
-                member1RiotId: '',
-                member2Name: '',
-                member2RiotId: '',
-                member3Name: '',
-                member3RiotId: '',
-                member4Name: '',
-                member4RiotId: ''
+                teamname: '',
+                teamleadername: '',
+                teamleaderEmail: '',
+                teamleaderPhoneno: '',
+                teamleaderRiotId: '',
+                teammember1name: '',
+                teammember1riotId: '',
+                teammember2name: '',
+                teammember2riotId: '',
+                teammember3name: '',
+                teammember3riotId: '',
+                teammember4name: '',
+                teammember4riotId: ''
             });
         } catch (error) {
             alert('There was a problem with your submission');
@@ -284,9 +286,9 @@ const Registration = () => {
                         </div>
                     </div>
                     <div className="input-box">
-                       <button className='submit' onClick={handleRegister}>
-                        Register
-                       </button>
+                        <button className='submit' onClick={handleRegister}>
+                            Register
+                        </button>
                     </div>
                 </form>
             </div>
