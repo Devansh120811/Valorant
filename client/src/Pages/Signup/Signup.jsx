@@ -166,7 +166,7 @@ const Signup = () => {
                         <div className=" flex flex-col gap-3 mt-4">
                             <h2 className="h2-signup text-lg">
                                 <p>Already have an account? </p>
-                                <a href="/" className=" underline Login">
+                                <a href="/Login" className=" underline Login">
                                     Log in
                                 </a>
                             </h2>

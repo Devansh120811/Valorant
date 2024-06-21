@@ -24,7 +24,8 @@ section::before {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#000, #0f0, #000);
+  background: linear-gradient(#000, #7D3C98, #000);
+  /* Purple Gradient */
   animation: animate 5s linear infinite;
 }
 
@@ -49,7 +50,8 @@ section span {
 }
 
 section span:hover {
-  background: #0f0;
+  background: #7D3C98;
+  /* Purple */
   transition: 0s;
 }
 
@@ -62,34 +64,37 @@ section .signin {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+  /* Corrected opacity */
 }
 
 .signin .input-tag {
   background-color: #333;
 }
 
-
-
 .signin .log-name {
-  color: #0f0;
+  color: #7D3C98;
+  /* Purple */
 }
 
 .signin .login-btn {
-  background-color: #0f0;
+  background-color: #7D3C98;
+  /* Purple */
 }
 
 .signin .signup-acc a {
-  color: #0f0;
+  color: #7D3C98;
+  /* Purple */
 }
 
 .Phoneno:hover {
-  background-color: #0f0;
+  background-color: #7D3C98;
+  /* Purple */
 }
 
 .Login {
-  color: #0f0;
-
+  color: #7D3C98;
+  /* Purple */
 }
 
 input[type="password"]::-ms-reveal,
