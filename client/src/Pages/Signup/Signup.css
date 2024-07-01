@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-section {
+.sec {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -19,7 +12,7 @@ section {
   overflow: hidden;
 }
 
-section::before {
+.sec::before {
   content: '';
   position: absolute;
   width: 100%;
@@ -33,13 +26,12 @@ section::before {
   0% {
     transform: translateY(-100%);
   }
-
   100% {
     transform: translateY(100%);
   }
 }
 
-section span {
+.sec .box-property {
   position: relative;
   display: block;
   width: calc(6.25vw - 2px);
@@ -49,52 +41,125 @@ section span {
   transition: 1.5s;
 }
 
-section span:hover {
+.sec .box-property:hover {
   background: #7D3C98;
-  /* Purple */
   transition: 0s;
 }
 
-section .signin {
+.sec .signup {
   position: absolute;
   width: 360px;
-  background: #222;
+  background: #000000;
   z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
-  /* Corrected opacity */
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
 }
 
-.signin .input-tag {
+.signup .input-tag {
   background-color: #333;
 }
 
-.signin .log-name {
+.signup .log-name {
   color: #7D3C98;
-  /* Purple */
 }
 
-.signin .login-btn {
+.signup .login-btn {
   background-color: #7D3C98;
-  /* Purple */
 }
 
-.signin .signup-acc a {
+.signup .signup-acc a {
   color: #7D3C98;
-  /* Purple */
 }
 
 .Phoneno:hover {
   background-color: #7D3C98;
-  /* Purple */
 }
 
-.Login {
+.login-color {
   color: #7D3C98;
-  /* Purple */
+}
+
+.sec .signup .content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+
+
+.sec .signup .content .form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sec .signup .content .form .inputBox {
+  position: relative;
+  width: 100%;
+}
+
+.sec .signup .content .form .inputBox input {
+  position: relative;
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.sec .signup .content .form .inputBox i {
+  position: absolute;
+  left: 0;
+  padding: 15px 10px;
+  font-style: normal;
+  color: #aaa;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.signup .content .form .inputBox input:focus~i,
+.signup .content .form .inputBox input:valid~i {
+  transform: translateY(-7.5px);
+  font-size: 0.8em;
+  color: #fff;
+}
+
+.signup .content .form .links {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup .content .form .links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.signup .content .form .links a:nth-child(2) {
+  color: #0f0;
+  font-weight: 600;
+}
+
+.signup .content .form .inputBox input[type="submit"] {
+  padding: 10px;
+  background: #0f0;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.35em;
+  letter-spacing: 0.05em;
+  cursor: pointer;
 }
 
 input[type="password"]::-ms-reveal,
@@ -107,15 +172,19 @@ input[type="password"]::-webkit-reveal-button {
   display: none;
 }
 
+input[type="submit"]:active {
+  opacity: 0.6;
+}
+
 @media (max-width: 900px) {
-  section span {
+  .sec .box-property {
     width: calc(10vw - 2px);
     height: calc(10vw - 2px);
   }
 }
 
 @media (max-width: 600px) {
-  section span {
+  .sec .box-property {
     width: calc(20vw - 2px);
     height: calc(20vw - 2px);
   }

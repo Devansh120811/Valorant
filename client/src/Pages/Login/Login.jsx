@@ -1,5 +1,5 @@
 import React from "react";
-import "./Login.css"
+import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,7 +8,7 @@ import { login } from "../../store/authslice.js";
 
 function Login() {
     const [showPass, setshowPass] = useState(false);
-    const [initialImage, setInitialImage] = useState("../../../assets/User.png")
+    const [initialImage, setInitialImage] = useState("../../../assets/User.png");
     const [fileName, setFileName] = useState();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -45,20 +45,20 @@ function Login() {
         setFileName(file);
     };
     const handleSubmit = (e) => {
-        e.preventDefault()
-    }
+        e.preventDefault();
+    };
     const handleLogin = async (e) => {
         validateEmail();
         validatePassword();
         if (!fileName) {
-            alert("Please Provide the Avatar Image.")
+            alert("Please Provide the Avatar Image.");
             return;
         }
         try {
-            const formdata = new FormData()
-            formdata.append("email", email)
-            formdata.append("password", password)
-            formdata.append("avatarImage", fileName)
+            const formdata = new FormData();
+            formdata.append("email", email);
+            formdata.append("password", password);
+            formdata.append("avatarImage", fileName);
             const response = await fetch("http://localhost:5000/login", {
                 method: "POST",
                 body: formdata,
@@ -68,14 +68,14 @@ function Login() {
             if (!response.ok) alert(dataa.message);
             else {
                 alert("User Login Successfully.");
-                window.localStorage.setItem("authStatus", true)
+                window.localStorage.setItem("authStatus", true);
                 window.localStorage.setItem("accesstoken", accessToken);
                 window.localStorage.setItem("refreshtoken", refreshToken);
                 dispatch(login({ accessToken, refreshToken }));
-                navigate("/Home");
+                navigate("/");
             }
         } catch (error) {
-            console.log("Error")
+            console.log("Error");
         }
 
         if (rememberMe) {
@@ -92,7 +92,6 @@ function Login() {
             localStorage.removeItem("rememberedPassword");
             localStorage.removeItem("expiryDate");
         }
-
     };
 
     // Load remembered email and password if available
@@ -118,22 +117,24 @@ function Login() {
 
     return (
         <form id="login-form" onSubmit={handleSubmit}>
-            <section>
+            <section className="part">
                 {Array.from({ length: 160 }, (_, index) => (
-                    <span key={index}></span>
+                    <span key={index} className="box-pr"></span>
                 ))}
 
                 <div className="signin">
-                    <div className="main-box  rounded-md">
-                        <h1 className="log-name text-3xl text-white  text-center mb-5">
-                            LOG IN
-                        </h1>
-                        <div className="signup">
+                    <div className="main-box  rounded-md content">
+                        <div className="signup ">
                             <div className="form">
                                 <div className="fieldset">
-                                    <div onClick={handleImageClick} className="flex flex-col justify-center items-center">
-                                        <img src={initialImage} width={100}>
-                                        </img>
+                                    <div
+                                        onClick={handleImageClick}
+                                        className="flex flex-col justify-center items-center"
+                                    >
+                                        <h1 className="log-name text-3xl text-white  text-center mb-5">
+                                            LOG IN
+                                        </h1>
+                                        <img src={initialImage} width={100}></img>
                                         <input
                                             type="file"
                                             id="upload-button"
@@ -155,7 +156,9 @@ function Login() {
                                                 pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 onBlur={validateEmail}
-                                                title={emailError ? "Please enter valid email address" : ""}
+                                                title={
+                                                    emailError ? "Please enter valid email address" : ""
+                                                }
                                                 required
                                             />
                                         </div>
@@ -173,28 +176,42 @@ function Login() {
                                                     name="password"
                                                     onChange={(e) => setPassword(e.target.value)}
                                                     onBlur={validatePassword}
-                                                    title={passwordError ? "Please enter valid password" : ""}
+                                                    title={
+                                                        passwordError ? "Please enter valid password" : ""
+                                                    }
                                                     required
                                                 />
                                             </div>
                                         </div>
                                         <div className="check mb-6 text-white flex gap-2 items-center">
-                                            <input type="checkbox" id="accept-terms" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
-                                            <label htmlFor="accept-terms">
-                                                Remember me
-                                            </label>
-                                            <input type="checkbox" id="ShowPass" checked={showPass} onChange={(e) => setshowPass(e.target.checked)} />
-                                            <label htmlFor="ShowPass">
-                                                Show Password
-                                            </label>
+                                            <input
+                                                type="checkbox"
+                                                id="accept-terms"
+                                                checked={rememberMe}
+                                                onChange={(e) => setRememberMe(e.target.checked)}
+                                            />
+                                            <label htmlFor="accept-terms">Remember me</label>
+                                            <input
+                                                type="checkbox"
+                                                id="ShowPass"
+                                                checked={showPass}
+                                                onChange={(e) => setshowPass(e.target.checked)}
+                                            />
+                                            <label htmlFor="ShowPass">Show Password</label>
                                         </div>
                                         <div className="login-box mb-2 flex flex-col">
-                                            <button className="login-btn bg-green-500 text-black w-full font-semibold text-lg py-2 h-12 rounded-md" onClick={handleLogin}>
+                                            <button
+                                                className="login-btn bg-green-500 text-black w-full font-semibold text-lg py-2 h-12 rounded-md"
+                                                onClick={handleLogin}
+                                            >
                                                 Log In
                                             </button>
                                         </div>
                                         <div className="forget-password text-center ">
-                                            <a href="/forgot-password" className="text-white underline">
+                                            <a
+                                                href="/forgot-password"
+                                                className="text-white underline"
+                                            >
                                                 Forget your password?
                                             </a>
                                         </div>
