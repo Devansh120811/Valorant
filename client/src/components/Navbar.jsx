@@ -19,6 +19,8 @@ function Navbar() {
 
   const lgout = () => {
     window.localStorage.removeItem('authStatus');
+    window.localStorage.removeItem('accesstoken')
+    window.localStorage.removeItem('refreshtoken')
     dispatch(logout());
   };
 
@@ -42,11 +44,14 @@ function Navbar() {
       try {
         const { exp } = JSON.parse(atob(accesstoken.split('.')[1])); // Decode the token and extract expiration time
         const currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
+        // console.log(currentTime,Math.floor(Date.now()))
         if (exp < currentTime) {
           // Access token has expired, logout the user
           dispatch(logout());
           dispatch(setAuthStatus(false));
           localStorage.removeItem('authStatus');
+          window.localStorage.removeItem('accesstoken')
+          window.localStorage.removeItem('refreshtoken')
           navigate('/');
         }
       } catch (error) {

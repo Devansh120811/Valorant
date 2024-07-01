@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './Registration.css';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Registration = () => {
     const [avatar, setAvatar] = useState(null);
+    const authstatus = useSelector((state) => state.auth.status)
     const [formData, setFormData] = useState({
         teamname: '',
         teamleadername: '',
@@ -18,7 +21,7 @@ const Registration = () => {
         teammember4name: '',
         teammember4riotId: ''
     });
-
+    const navigate = useNavigate()
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -27,45 +30,51 @@ const Registration = () => {
     const handleFileChange = (e) => {
         setAvatar(URL.createObjectURL(e.target.files[0]));
     };
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
-    const handleRegister = async () => {
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+    const accesstoken = window.localStorage.getItem("accesstoken")
+    const handleRegister = async () => {
         // Form validation
-        for (const key in formData) {
-            if (formData[key] === '') {
-                alert(`Please fill in the ${key.replace(/([A-Z])/g, ' $1')}`);
+        try {
+            console.log(authstatus)
+            if (authstatus === "false") {
+                navigate("/Login")
+            }
+            for (const key in formData) {
+                if (formData[key] === '') {
+                    alert(`Please fill in the ${key.replace(/([A-Z])/g, ' $1')}`);
+                    return;
+                }
+            }
+    
+            if (!avatar) {
+                alert('Please upload an avatar');
                 return;
             }
-        }
-
-        if (!avatar) {
-            alert('Please upload an avatar');
-            return;
-        }
-
-        // Prepare data for submission
-        const data = new FormData();
-        data.append('teamImage', document.getElementById('avatar').files[0]);
-        for (const key in formData) {
-            data.append(key, formData[key]);
-        }
-
-        try {
+    
+            // Prepare data for submission
+            const data = new FormData();
+            data.append('teamImage', document.getElementById('avatar').files[0]);
+            for (const key in formData) {
+                data.append(key, formData[key]);
+            }
+    
             const response = await fetch('http://localhost:5000/registration', {
                 method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + accesstoken
+                },
                 body: data
             });
-
+    
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                console.log(await response.json())
             }
-
             const result = await response.json();
             alert('Registration successful!');
             console.log('Success:', result);
-
             // Reset form
             setAvatar(null);
             setFormData({
@@ -83,9 +92,10 @@ const Registration = () => {
                 teammember4name: '',
                 teammember4riotId: ''
             });
+            navigate("/Matches")
+            
         } catch (error) {
-            alert('There was a problem with your submission');
-            console.error('Error:', error);
+           console.log("Error")   
         }
     };
 
@@ -110,177 +120,193 @@ const Registration = () => {
                     </div>
 
                     <div className="input-box">
-                        <label htmlFor="leaderName" className="label">Leader Name</label>
+                        <label htmlFor="teamname" className="label">Team Name</label>
                         <div className="input-container">
                             <i className="bx bx-user"></i>
                             <input
                                 type="text"
                                 className="input-field"
-                                name="leaderName"
-                                id="leaderName"
-                                placeholder="Leader Name"
-                                value={formData.leaderName}
+                                name="teamname"
+                                id="teamname"
+                                placeholder="Team Name"
+                                value={formData.teamname}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="leaderEmail" className="label">Leader Email</label>
+                        <label htmlFor="teamleadername" className="label">Leader Name</label>
+                        <div className="input-container">
+                            <i className="bx bx-user"></i>
+                            <input
+                                type="text"
+                                className="input-field"
+                                name="teamleadername"
+                                id="teamleadername"
+                                placeholder="Leader Name"
+                                value={formData.teamleadername}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="input-box">
+                        <label htmlFor="teamleaderEmail" className="label">Leader Email</label>
                         <div className="input-container">
                             <i className="bx bx-envelope"></i>
                             <input
                                 type="email"
                                 className="input-field"
-                                name="leaderEmail"
-                                id="leaderEmail"
+                                name="teamleaderEmail"
+                                id="teamleaderEmail"
                                 placeholder="Email"
-                                value={formData.leaderEmail}
+                                value={formData.teamleaderEmail}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="leaderPhone" className="label">Leader Phone No.</label>
+                        <label htmlFor="teamleaderPhoneno" className="label">Leader Phone No.</label>
                         <div className="input-container">
                             <i className="bx bx-mobile-alt"></i>
                             <input
                                 type="tel"
                                 className="input-field"
-                                name="leaderPhone"
-                                id="leaderPhone"
+                                name="teamleaderPhoneno"
+                                id="teamleaderPhoneno"
                                 pattern="[0-9]{10}"
                                 placeholder="Phone No."
-                                value={formData.leaderPhone}
+                                value={formData.teamleaderPhoneno}
                                 onChange={handleInputChange}
+                                maxLength={10}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="leaderRiotId" className="label">Leader Riot Id</label>
+                        <label htmlFor="teamleaderRiotId" className="label">Leader Riot Id</label>
                         <div className="input-container">
                             <input
                                 type="text"
                                 className="input-field"
-                                name="leaderRiotId"
-                                id="leaderRiotId"
+                                name="teamleaderRiotId"
+                                id="teamleaderRiotId"
                                 placeholder="Leader Riot Id"
-                                value={formData.leaderRiotId}
+                                value={formData.teamleaderRiotId}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member1Name" className="label">Member-1 Name</label>
+                        <label htmlFor="teammember1name" className="label">Member-1 Name</label>
                         <div className="input-container">
                             <i className="bx bx-user"></i>
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member1Name"
-                                id="member1Name"
+                                name="teammember1name"
+                                id="teammember1name"
                                 placeholder="Member name"
-                                value={formData.member1Name}
+                                value={formData.teammember1name}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member1RiotId" className="label">Member-1 Riot Id</label>
+                        <label htmlFor="teammember1riotId" className="label">Member-1 Riot Id</label>
                         <div className="input-container">
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member1RiotId"
-                                id="member1RiotId"
+                                name="teammember1riotId"
+                                id="teammember1riotId"
                                 placeholder="Member Riot Id"
-                                value={formData.member1RiotId}
+                                value={formData.teammember1riotId}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member2Name" className="label">Member-2 Name</label>
+                        <label htmlFor="teammember2name" className="label">Member-2 Name</label>
                         <div className="input-container">
                             <i className="bx bx-user"></i>
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member2Name"
-                                id="member2Name"
+                                name="teammember2name"
+                                id="teammember2name"
                                 placeholder="Member name"
-                                value={formData.member2Name}
+                                value={formData.teammember2name}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member2RiotId" className="label">Member-2 Riot Id</label>
+                        <label htmlFor="teammember2riotId" className="label">Member-2 Riot Id</label>
                         <div className="input-container">
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member2RiotId"
-                                id="member2RiotId"
+                                name="teammember2riotId"
+                                id="teammember2riotId"
                                 placeholder="Member Riot Id"
-                                value={formData.member2RiotId}
+                                value={formData.teammember2riotId}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member3Name" className="label">Member-3 Name</label>
+                        <label htmlFor="teammember3name" className="label">Member-3 Name</label>
                         <div className="input-container">
                             <i className="bx bx-user"></i>
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member3Name"
-                                id="member3Name"
+                                name="teammember3name"
+                                id="teammember3name"
                                 placeholder="Member name"
-                                value={formData.member3Name}
+                                value={formData.teammember3name}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member3RiotId" className="label">Member-3 Riot Id</label>
+                        <label htmlFor="teammember3riotId" className="label">Member-3 Riot Id</label>
                         <div className="input-container">
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member3RiotId"
-                                id="member3RiotId"
+                                name="teammember3riotId"
+                                id="teammember3riotId"
                                 placeholder="Member Riot Id"
-                                value={formData.member3RiotId}
+                                value={formData.teammember3riotId}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member4Name" className="label">Member-4 Name</label>
+                        <label htmlFor="teammember4name" className="label">Member-4 Name</label>
                         <div className="input-container">
                             <i className="bx bx-user"></i>
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member4Name"
-                                id="member4Name"
+                                name="teammember4name"
+                                id="teammember4name"
                                 placeholder="Member name"
-                                value={formData.member4Name}
+                                value={formData.teammember4name}
                                 onChange={handleInputChange}
                             />
                         </div>
                     </div>
                     <div className="input-box">
-                        <label htmlFor="member4RiotId" className="label">Member-4 Riot Id</label>
+                        <label htmlFor="teammember4riotId" className="label">Member-4 Riot Id</label>
                         <div className="input-container">
                             <input
                                 type="text"
                                 className="input-field"
-                                name="member4RiotId"
-                                id="member4RiotId"
+                                name="teammember4riotId"
+                                id="teammember4riotId"
                                 placeholder="Member Riot Id"
-                                value={formData.member4RiotId}
+                                value={formData.teammember4riotId}
                                 onChange={handleInputChange}
                             />
                         </div>
