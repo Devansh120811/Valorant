@@ -16,7 +16,6 @@ const teamSchema = new mongoose.Schema({
     },
     teamleaderEmail:{
        type:String,
-       unique:true,
        required:true
     },
     teamleaderRiotId: {
