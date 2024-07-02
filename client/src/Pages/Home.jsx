@@ -1,5 +1,6 @@
 import React from 'react';
-import Navbar from '../components/Navbar.jsx';
+import Navbar from '../components/Navbar.jsx'
+import Footer from '../components/Footer.jsx';
 import { Link } from 'react-router-dom';
 import './Home.css';
 function Home() {
@@ -80,7 +81,7 @@ function Home() {
         </p>
       </div>
       <div className='flex flex-col gap-3 justify-center items-center'>
-        <div className='flex justify-between  matches items-center gap-10' data-aos="fade-right">
+        <div className='flex md:flex-row flex-col justify-between  matches items-center gap-10' data-aos="fade-right">
           <div className='flex flex-col gap-2 items-center justify-center'>
             <p className='text-white text-center'>
               1 August,2024,12:00:00 PM
@@ -98,7 +99,7 @@ function Home() {
               Youtube Stream
             </p>
           </div>
-          <div className='flex gap-5   justify-between items-center'>
+          <div className='flex gap-5 justify-between items-center'>
             <img src='../../assets/t2.jpeg' className='w-24 h-24 rounded-full hover:cursor-pointer'>
             </img>
             <p className='text-white text-2xl'>
@@ -108,7 +109,7 @@ function Home() {
             </img>
           </div>
         </div>
-        <div className='flex justify-between  matches items-center gap-10' data-aos="fade-left">
+        <div className='flex md:flex-row flex-col  justify-between  matches items-center gap-10' data-aos="fade-left">
           <div className='flex flex-col gap-2 items-center justify-center'>
             <p className='text-white text-center'>
               15 August,2024,12:00:00 AM
@@ -136,7 +137,7 @@ function Home() {
             </img>
           </div>
         </div>
-        <div className='flex justify-between  matches items-center gap-10' data-aos="fade-right">
+        <div className='flex md:flex-row flex-col  justify-between  matches items-center gap-10' data-aos="fade-right">
           <div className='flex flex-col gap-2 items-center justify-center'>
             <p className='text-white text-center'>
               1 September,2024,22:00:00 PM
@@ -165,6 +166,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

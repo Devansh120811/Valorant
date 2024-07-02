@@ -161,7 +161,7 @@
   background-color: #09002a;
   border: 3px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
-  width: 800PX;
+  width: auto;
   border-radius: 8px;
 }
 .match{
