@@ -91,7 +91,7 @@ function Navbar() {
           <div className={`Navbar ${scrolled ? 'Scrolled' : ''} w-screen p-2`}>
             <div className='flex md:gap-10 gap-2 items-center'>
               <img src='../../assets/Logo.jpeg' className='rounded-full md:w-24 md:h-24 w-12 h-12' alt='Logo' />
-              <p className='font-Poppins text-white font-semibold md:text-base text-sm'>
+              <p className='separator text-white font-semibold md:text-3xl text-sm'>
                 RNG
               </p>
             </div>
