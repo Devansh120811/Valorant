@@ -80,7 +80,7 @@ function Home() {
           Stay tuned for these exciting upcoming matches, featuring top teams and players competing for glory. Don’t miss out on the action!
         </p>
       </div>
-      <div className='flex flex-col gap-3 justify-center items-center'>
+      <div className='flex flex-col md:gap-4 gap-3 justify-center items-center'>
         <div className='flex md:flex-row flex-col justify-between  matches items-center gap-10' data-aos="fade-right">
           <div className='flex flex-col gap-2 items-center justify-center'>
             <p className='text-white text-center'>

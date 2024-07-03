@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+.matches-container {
+  background-image: url(../../../assets/P5.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+
+.matches-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  /* Adjust the gap between matches */
+  width: 100%;
+  /* Ensure it takes the full width */
+  padding: 1rem;
+  /* Add some padding for better spacing */
+}
+
+
+
+.matches1 {
+  width: 800px;
+  background-color: #09002a;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  /* Add margin between matches */
+  overflow: hidden;
+  /* Hide overflow content */
+}
+
+.match1{
+  transition: color 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+  /* Hide overflow content */
+  text-overflow: ellipsis;
+  /* Display ellipsis (...) for overflow text */
+  white-space: nowrap;
+  /* Prevent text from wrapping */
+}
+
+.match1:hover {
+  color: #9344c8;
+}
+
+.Y1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b154f0;
+  width: auto;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.Y1:hover {
+  background-color: #6e21b3;
+}
+
+@media screen and (max-width:768px){
+  .matches1{
+    width: 500px;
+  }
+}

@@ -157,32 +157,37 @@
   text-align: center;
   clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);
 }
-.matches{
-  background-color: #09002a;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  padding: 20px;
-  width: auto;
-  border-radius: 8px;
-}
-.match{
-  transition: color 0.3s ;
-  cursor: pointer;
-}
-.match:hover{
-color: #9344c8;
-}
-.Y{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #b154f0;
-  width: auto;
-  padding:10px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background-color 0.3s ;
+  .matches{
+    background-color: #09002a;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    width: 800px;
+    border-radius: 8px;
+  }
+  .match{
+    transition: color 0.3s ;
+    cursor: pointer;
+  }
+  .match:hover{
+  color: #9344c8;
+  }
+  .Y{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b154f0;
+    width: auto;
+    padding:10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ;
 
-}
-.Y:hover{
-  background-color: #6e21b3;
-}
+  }
+  .Y:hover{
+    background-color: #6e21b3;
+  }
+  @media screen and (max-width:768px){
+    .matches{
+      width: 500px;
+    }
+  }
