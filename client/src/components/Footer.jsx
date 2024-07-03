@@ -5,7 +5,7 @@ import './Footer.css';
 function Footer() {
     return (
         <div className="footer-container flex flex-col justify-between items-center w-full">
-            <div className="footer-bg w-full h-auto mt-5 flex flex-col items-center p-4">
+            <div className="footer-bg w-full h-auto  flex flex-col items-center p-4">
                 <div className="flex flex-col md:flex-row md:gap-20 gap-5 items-center w-full justify-between">
                     <div className="flex flex-col gap-2 w-auto items-center md:items-start">
                         <div className="flex justify-center items-center">
