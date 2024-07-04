@@ -75,7 +75,7 @@ const Signup = () => {
     setFileName(file);
   };
   return (
-    <form id="signup-form" onSubmit={handleSubmit} className="bg-black">
+    <form id="signup-form" onSubmit={handleSubmit}>
       <section className="sec">
         {Array.from({ length: 160 }, (_, index) => (
           <span key={index} className="box-property"></span>
@@ -93,7 +93,7 @@ const Signup = () => {
                     <h1 className="log-name text-3xl flex justify-center font-medium mb-4 ">
               SIGN UP
             </h1>
-                    <img src={initialImage} width={100}></img>
+                    <img src={initialImage} width={40}></img>
                     <input
                       type="file"
                       id="upload-button"

@@ -44,7 +44,7 @@ const VerifyOTP = () => {
       else {
         const r1 = await response.json()
         alert(r1.message)
-        navigate("/")
+        navigate("/Login")
       }
     } catch (error) {
       alert("Error:", error)
@@ -74,7 +74,7 @@ const VerifyOTP = () => {
   return (
     <div className="otp-container gap-4">
       <h2 className="otp-title text-center font-Poppins">OTP Verification</h2>
-      <p className=" text-xl font-semibold">
+      <p className=" md:text-xl font-semibold text-center text-sm">
         Enter the Six digit OTP for Verification:
       </p>
       <div className="otp-inputs">
