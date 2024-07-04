@@ -41,40 +41,37 @@ const Signup = asynchandler(async (req, res) => {
     if (!image) {
         throw new Apierrors(400, "Image file is required")
     }
-    try {
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASS
-            }
-        })
-        const OTP = Math.floor(100000 + Math.random() * 900000)
-        await transporter.sendMail({
-            from: process.env.EMAIL,
-            to: email,
-            subject: "OTP for Verification",
-            text: `Your OTP for verification is ${OTP}`
-        })
-        const user = await User.create({
-            email,
-            password,
-            avatarImage: image.secure_url,
-            OTP,
-            avatarImagepath: avatarimagelocalpath
-        })
-        const createdUser = await User.findById(user._id).select('-password -refreshToken')
-        if (!createdUser) {
-            throw new Apierrors(500, "Something went wrong while registering user.")
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASS
         }
-        // console.log(createdUser)
-        return res.status(200).json(new Apiresponse(200, createdUser, "OTP sent Successfully."))
-    } catch (error) {
-        return res.status(500).json(new Apiresponse(500, {}, "Failed to Send OTP."))
+    })
+    const OTP = Math.floor(100000 + Math.random() * 900000)
+    await transporter.sendMail({
+        from: process.env.EMAIL,
+        to: email,
+        subject: "OTP for Verification",
+        text: `Your OTP for verification is ${OTP}`
+    })
+    const user = await User.create({
+        email,
+        password,
+        avatarImage: image.secure_url,
+        OTP,
+        avatarImagepath: avatarimagelocalpath
+    })
+    const createdUser = await User.findById(user._id).select('-password -refreshToken')
+    if (!createdUser) {
+        throw new Apierrors(500, "Something went wrong while registering user.")
     }
+    // console.log(createdUser)
+    return res.status(200).json(new Apiresponse(200, createdUser, "OTP sent Successfully."))
+
 })
 const verifyOTPEmail = asynchandler(async (req, res) => {
     const userId = req.params.id
