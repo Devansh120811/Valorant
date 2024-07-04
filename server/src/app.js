@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import userrouter from './routes/user.routes.js'
 import teamsRegisrouter from './routes/teamRegis.routes.js'
 import match from './routes/matches.routes.js'
+import Contact from './routes/Contact.routes.js'
 const app = express()
 app.use(cors({
     origin: process.env.CORS_URL,
@@ -22,4 +23,5 @@ app.use(express.static("public"))
 app.use("/", userrouter)
 app.use("/", teamsRegisrouter)
 app.use("/", match)
+app.use("/", Contact)
 export default app
