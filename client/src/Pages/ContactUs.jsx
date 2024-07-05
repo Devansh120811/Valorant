@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import FooterC from "../components/FooterC.jsx";
 import "./ContactUs.css";
 
 function ContactUs() {
@@ -64,7 +65,7 @@ function ContactUs() {
   };
 
   return (
-    <div className="h-auto gap-20 flex flex-col">
+    <div className="gap-20 flex flex-col bodyy">
       <Navbar />
       <section id="section-wrapper">
         <div className="box-wrapper">
@@ -90,17 +91,12 @@ function ContactUs() {
             </ul>
             <ul className="social-icons">
               <li>
-                <a href="#">
-                  <i className="fab fa-facebook"></i>
+                <a href="https://www.instagram.com/hetavi.15/" target="_blank">
+                  <i className="fab fa-instagram"></i>
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <i className="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
+                <a href="https://www.linkedin.com/in/amit-kanjariya-235078269/" target="_blank">
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </li>
@@ -177,7 +173,7 @@ function ContactUs() {
           </div>
         </div>
       </section>
-      {/* <Footer/> */}
+      <FooterC/>
     </div>
   );
 }
