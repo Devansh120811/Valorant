@@ -8,7 +8,6 @@ const createMatch = asynchandler(async (req, res) => {
     if (!team1 || !team2 || !team1Image || !team2Image || !streamUrl || !MatchDate || !Matchtime) {
         return res.status(400).json(new Apiresponse(400, {}, "Please provide all required fields."));
     }
-
     // Create new match
     const match = await Match.create({
         team1,
