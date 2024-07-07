@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
+import Navbar from "../components/Navbar/Navbar.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 import "./About.css";
 
 function About() {

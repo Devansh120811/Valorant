@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar.jsx";
-import FooterC from "../components/FooterC.jsx";
+import Navbar from "../components/Navbar/Navbar.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 import "./ContactUs.css";
 
 function ContactUs() {
@@ -173,7 +173,7 @@ function ContactUs() {
           </div>
         </div>
       </section>
-      <FooterC/>
+      <Footer/>
     </div>
   );
 }
