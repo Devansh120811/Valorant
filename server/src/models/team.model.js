@@ -14,9 +14,9 @@ const teamSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    teamleaderEmail:{
-       type:String,
-       required:true
+    teamleaderEmail: {
+        type: String,
+        required: true
     },
     teamleaderRiotId: {
         type: String,
@@ -40,6 +40,9 @@ const teamSchema = new mongoose.Schema({
     ],
     Points: {
         type: Number
+    },
+    isRegistered: {
+        type: Boolean
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,

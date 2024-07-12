@@ -20,9 +20,12 @@ export const generateMatches = (teams) => {
     for (let i = 0; i < teams.length - (teams.length % 2); i += 2) {
         currentDate = new Date(currentDate.getTime() + interval);
         const match = {
-            team1: teams[i],
-            team2: teams[i + 1],
-            date: currentDate,
+            team1: teams[i].teamname,
+            team2: teams[i + 1].teamname,
+            team1Image: teams[i].teamImage, // Assuming teamImage is the property name
+            team2Image: teams[i + 1].teamImage, // Assuming teamImage is the property name
+            MatchDate: currentDate.toISOString().split('T')[0],
+            Matchtime: currentDate.toTimeString().split(' ')[0],
             streamUrl: getRandomStreamUrl()
         };
         matches.push(match);

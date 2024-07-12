@@ -7,4 +7,4 @@ import Signup from './Signup/Signup.jsx'
 import VerifyOTP from './VerifyOTP/VerifyOTP.jsx'
 import Registration from './Registration/Registration.jsx'
 import Matches from './Matches/Matches.jsx'
-export { Home, About, ContactUs, Login, ForgotPasswordPage, Signup, VerifyOTP,Registration,Matches }
+export { Home, About, ContactUs, Login, ForgotPasswordPage, Signup, VerifyOTP, Registration, Matches }

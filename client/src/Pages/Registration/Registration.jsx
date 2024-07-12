@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Registration.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 const Registration = () => {
     const [avatar, setAvatar] = useState(null);
     const authstatus = useSelector((state) => state.auth.status)
@@ -48,19 +47,19 @@ const Registration = () => {
                     return;
                 }
             }
-    
+
             if (!avatar) {
                 alert('Please upload an avatar');
                 return;
             }
-    
+
             // Prepare data for submission
             const data = new FormData();
             data.append('teamImage', document.getElementById('avatar').files[0]);
             for (const key in formData) {
                 data.append(key, formData[key]);
             }
-    
+
             const response = await fetch('http://localhost:5000/registration', {
                 method: 'POST',
                 headers: {
@@ -68,13 +67,14 @@ const Registration = () => {
                 },
                 body: data
             });
-    
+
             if (!response.ok) {
                 console.log(await response.json())
             }
             const result = await response.json();
-            alert('Registration successful!');
-            console.log('Success:', result);
+            alert(result.message)
+            // const { orderId, teamId } = result.data
+            // initiatePayment(orderId, teamId)
             // Reset form
             setAvatar(null);
             setFormData({
@@ -92,13 +92,78 @@ const Registration = () => {
                 teammember4name: '',
                 teammember4riotId: ''
             });
-            navigate("/Matches")
-            
+            navigate("/")
         } catch (error) {
-           console.log("Error")   
+            console.log("Error")
         }
     };
+    // const initiatePayment = (orderId, teamId) => {
+    //     const options = {
+    //         key: String(import.meta.env.RAZORPAY_KEY),
+    //         amount: "50000", // Amount in paise
+    //         currency: "INR",
+    //         name: "RNG",
+    //         description: "Team Registration Fee",
+    //         image: "../../../assets/Logo.jpeg",
+    //         order_id: orderId,
+    //         handler: function (response) {
+    //             alert(response.razorpay_payment_id);
+    //             alert(response.razorpay_order_id);
+    //             alert(response.razorpay_signature);
 
+    //             // Call your backend to verify the payment
+    //             verifyPayment(response, teamId);
+    //         },
+    //         prefill: {
+    //             name: String(formData.teamleadername),
+    //             email: String(formData.teamleaderEmail),
+    //             contact: String(formData.teamleaderPhoneno)
+    //         },
+    //         notes: {
+    //             address: "Valorant Registration PVT Limited"
+    //         },
+    //         theme: {
+    //             color: "#3399cc"
+    //         }
+    //     };
+    //     const rzp1 = new window.Razorpay(options);
+    //     rzp1.on('payment.failed', function (response) {
+    //         alert(response.error.code);
+    //         alert(response.error.description);
+    //         alert(response.error.source);
+    //         alert(response.error.step);
+    //         alert(response.error.reason);
+    //         alert(response.error.metadata.order_id);
+    //         alert(response.error.metadata.payment_id);
+    //     });
+    //     rzp1.open();
+    // };
+
+    // const verifyPayment = async (paymentDetails, teamId) => {
+    //     try {
+    //         const response = await fetch('http://localhost:5000/registration/payment', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 ...paymentDetails,
+    //                 teamId
+    //             })
+    //         });
+    //         const data = await response.json();
+
+    //         if (data.success) {
+    //             alert(data.data.message);
+    //             navigate("/")
+    //             // Redirect or show success message
+    //         } else {
+    //             alert('Payment failed!');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //     }
+    // };
     return (
         <main className='body'>
             <div className="wrapper">
